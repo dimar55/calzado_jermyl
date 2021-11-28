@@ -1,30 +1,101 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <div id="app" class="app">
+    <div class="header">
+      <ul class="datosHeader">
+        <div class="cLi">
+          <li><img src="./assets/iconLocation.png" alt="" /></li>
+          <li>Calle 2 #9-69 Barrio Santander / Villa del Rosario</li>
+        </div>
+        <div class="cLi">
+          <li><img src="./assets/iconPhone.png" alt="" /></li>
+          <li>3156252089</li>
+        </div>
+      </ul>
+    </div>
   </div>
-  <router-view/>
+ <Descripcion></Descripcion>
+  <footer class="piePagina">
+    <div class="info">
+      <h2>INFORMACIÓN</h2>
+      <ul class="pList">
+        <div class="pLocation">
+          <li><img src="./assets/iconLocation.png" alt="" /></li>
+          <li>Calle 2 #9-69 Barrio Santander / Villa del Rosario</li>
+        </div>
+        <div class="pPhone">
+          <li><img src="./assets/iconPhone.png" alt="" /></li>
+          <li>3156252089</li>
+        </div>
+      </ul>
+    </div>
+    <div class="fcategorias">
+      <h2>CATEGORÍAS</h2>
+      <p>Dama / Caballero / Niños</p>
+    </div>
+  </footer>
 </template>
+<script>
+import Navi from "./components/barraNav.vue";
+import Welcome from "./components/bienvenido.vue";
+import SingUp from "./components/singUp.vue";
+import RegistrarOperador from "./components/registrarOperador.vue";
+import RegistrarProveedor from "./components/registrarProveedor.vue";
+import Header from "./components/header.vue";
+import Descripcion from "./components/descripcion.vue";
+export default {
+  name: "App",
+  components: { Navi, Welcome, SingUp, RegistrarOperador, RegistrarProveedor, Header, Descripcion },
+};
+</script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Red Hat Display", sans-serif;
+}
+
+.datosHeader {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  background: rgba(0, 0, 0, 0.84);
+  color: white;
+  font-size: 25px;
+}
+
+.cLi {
+  display: flex;
+  margin-top: 12px;
+}
+
+.cLi,
+li {
+  padding-left: 15px;
+}
+.piePagina {
+  display: flex;
+  justify-content: space-evenly;
+  background: rgba(0, 0, 0, 0.86);
+  color: white;
+  font-size: 25px;
   text-align: center;
-  color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
+.pList {
+  list-style: none;
+  justify-content: start;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.pLocation {
+  display: flex;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.pPhone {
+  display: flex;
+}
+.info {
+  margin: 30px;
+}
+.fcategorias{
+  margin: 30px;
+ 
 }
 </style>
