@@ -4,16 +4,8 @@
   </div>
 </template>
 <script>
-import Navi from "./components/barraNav.vue";
-import Welcome from "./components/bienvenido.vue";
-import SingUp from "./components/singUp.vue";
-import RegistrarOperador from "./components/registrarOperador.vue";
-import RegistrarProveedor from "./components/registrarProveedor.vue";
-import Header from "./components/header.vue";
-import Descripcion from "./components/descripcion.vue";
 export default {
-  name: "App",
-  components: { Navi, Welcome, SingUp, RegistrarOperador, RegistrarProveedor, Header, Descripcion },
+  name: "App"
 };
 </script>
 
