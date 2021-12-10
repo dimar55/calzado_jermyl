@@ -59,6 +59,8 @@
 import axios from "axios";
 import Header from "../components/header.vue";
 import Navi from "../components/barraNav.vue";
+import Paneloperador from "../components/paneloperador.vue";
+
 export default {
   name: "Calzado",
   data() {
@@ -71,7 +73,7 @@ export default {
 })
     };
   },
-  components: { Header, Navi },
+  components: { Header, Navi, Paneloperador},
   methods: {
     getAll() {
       axios

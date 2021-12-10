@@ -1,5 +1,4 @@
 <template>
-  <div id="app" class="app">
     <div class="header">
       <ul class="datosHeader">
         <div class="cLi">
@@ -12,10 +11,11 @@
         </div>
       </ul>
     </div>
-  </div>
-<Navi></Navi>
- <Descripcion></Descripcion>
-  <footer class="piePagina">
+    
+<Header></Header>
+<Paneladmin></Paneladmin>
+
+     <footer class="piePagina">
     <div class="info">
       <h2>INFORMACIÓN</h2>
       <ul class="pList">
@@ -37,56 +37,15 @@
 </template>
 
 <script>
-import Descripcion from "../components/descripcion.vue";
-import Navi from "../components/barraNav.vue";
+import axios from "axios";
+import Header from "../components/header.vue";
+import Paneladmin from "../components/paneladmin.vue";    
 export default {
-    name: "Conocenos",
-    components: {Descripcion,Navi}
+    name: 'panelAd',
+    components: {Header, Paneladmin}
 }
 </script>
 
 <style>
-.datosHeader {
-  display: flex;
-  justify-content: space-evenly;
-  list-style: none;
-  background: rgba(0, 0, 0, 0.84);
-  color: white;
-  font-size: 25px;
-}
 
-.cLi {
-  display: flex;
-  margin-top: 12px;
-}
-
-.cLi,
-li {
-  padding-left: 15px;
-}
-.piePagina {
-  display: flex;
-  justify-content: space-evenly;
-  background: rgba(0, 0, 0, 0.86);
-  color: white;
-  font-size: 25px;
-  text-align: center;
-}
-.pList {
-  list-style: none;
-  justify-content: start;
-}
-.pLocation {
-  display: flex;
-}
-.pPhone {
-  display: flex;
-}
-.info {
-  margin: 30px;
-}
-.fcategorias{
-  margin: 30px;
- 
-}
 </style>

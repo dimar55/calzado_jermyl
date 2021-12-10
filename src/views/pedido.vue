@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="app">
+        <div id="app" class="app">
     <div class="header">
       <ul class="datosHeader">
         <div class="cLi">
@@ -13,9 +13,8 @@
       </ul>
     </div>
   </div>
-<Navi></Navi>
- <Descripcion></Descripcion>
-  <footer class="piePagina">
+<Pedido></Pedido>
+   <footer class="piePagina">
     <div class="info">
       <h2>INFORMACIÓN</h2>
       <ul class="pList">
@@ -33,60 +32,13 @@
       <h2>CATEGORÍAS</h2>
       <p>Dama / Caballero / Niños</p>
     </div>
-  </footer>
+  </footer> 
 </template>
 
 <script>
-import Descripcion from "../components/descripcion.vue";
-import Navi from "../components/barraNav.vue";
+import Pedido from '../components/rPedido.vue';
 export default {
-    name: "Conocenos",
-    components: {Descripcion,Navi}
+    name: 'pedido',
+    components: {Pedido}
 }
 </script>
-
-<style>
-.datosHeader {
-  display: flex;
-  justify-content: space-evenly;
-  list-style: none;
-  background: rgba(0, 0, 0, 0.84);
-  color: white;
-  font-size: 25px;
-}
-
-.cLi {
-  display: flex;
-  margin-top: 12px;
-}
-
-.cLi,
-li {
-  padding-left: 15px;
-}
-.piePagina {
-  display: flex;
-  justify-content: space-evenly;
-  background: rgba(0, 0, 0, 0.86);
-  color: white;
-  font-size: 25px;
-  text-align: center;
-}
-.pList {
-  list-style: none;
-  justify-content: start;
-}
-.pLocation {
-  display: flex;
-}
-.pPhone {
-  display: flex;
-}
-.info {
-  margin: 30px;
-}
-.fcategorias{
-  margin: 30px;
- 
-}
-</style>

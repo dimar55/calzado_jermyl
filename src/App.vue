@@ -1,14 +1,19 @@
 <template>
   <div id="app" class="app">
+  
     <router-view></router-view>
+     
   </div>
 </template>
 <script>
+
+
 export default {
-  name: "App"
+  name: "App",
+ 
 };
 </script>
-
+ 
 <style>
 * {
   margin: 0;
@@ -55,8 +60,7 @@ li {
 .info {
   margin: 30px;
 }
-.fcategorias{
+.fcategorias {
   margin: 30px;
- 
 }
 </style>
