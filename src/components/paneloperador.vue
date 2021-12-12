@@ -4,15 +4,15 @@
     <div class="accionesop">
         <div class="pnlop">
             <h3>Registrar Pedido</h3>
-            <button class="btnadmin"><img src="../assets/entrar.png" alt=""></button>
+            <button class="btnadmin"><img src="../assets/entrar.png" alt="" @click="goPedido"></button>
             </div>
         <div class="pnlop">
             <h3>Administrar productos</h3>
-            <button class="btnadmin"><img src="../assets/entrar.png" alt=""></button>
+            <button class="btnadmin"><img src="../assets/entrar.png" alt="" @click="goProductos"></button>
             </div>
         <div class="pnlop">
             <h3>Balances</h3>
-        <button class="btnadmin " ><img src="../assets/entrar.png" alt=""></button>
+        <button class="btnadmin " ><img src="../assets/entrar.png" alt="" @click="goBalance"></button>
             </div>
         </div>   
     </div> 
@@ -21,6 +21,17 @@
 <script>
 export default {
     name: 'Paneloperador',
+    methods:{
+        goProductos(){
+            this.$router.push({path: '/administrar-productos'});            
+        },
+        goBalance(){
+            this.$router.push({path: '/balance'});
+        },
+        goPedido(){
+            this.$router.push({path: '/registrar-pedido'});
+        }
+    }
 }
 </script>
 

@@ -1,12 +1,24 @@
 <template>
   <div class="modal" tabindex="-1">
-    <div class="contenedor">
+    <div class="contenedorMaterial">
       <div id="head">
-        <h4 id="titulo">Agregar proveedor</h4>
+        <h4 id="titulo">Agregar material</h4>
         <img src="../assets/cerrar.png" alt="" @click="changeModal" />
       </div>
       <br />
-      <form name="frmOperador" v-on:submit.prevent="registrarProveedor">
+      <form name="frmOperador" v-on:submit.prevent="registrarMaterial">
+        <div class="form-group">
+          <label for="txtInfo" id="label"><b>Código: </b></label><br />
+          <input
+            type="text"
+            name="txtInfo"
+            id="txtInfo"
+            class="form-control"
+            placeholder="Ingresar código"
+            v-model="material.codigo"
+          />
+        </div>
+
         <div class="form-group">
           <label for="txtInfo" id="label"><b>Nombre: </b></label><br />
           <input
@@ -15,91 +27,93 @@
             id="txtInfo"
             class="form-control"
             placeholder="Ingresar nombre"
-            v-model="proveedor.nombre"
+            v-model="material.nombre"
           />
         </div>
 
         <div class="form-group">
-          <label for="txtInfo" id="label"><b>Identificación:</b></label
+          <label for="txtInfo" id="label"><b>Color:</b></label
           ><br />
           <input
             type="text"
             name="txtInfo"
             id="txtInfo"
             class="form-control"
-            placeholder="Ingresar identificación"
-            v-model="proveedor.cedula"
+            placeholder="Ingresar color"
+            v-model="material.color"
           />
         </div>
 
         <div class="form-group">
-          <label for="txtInfo" id="label"><b>Celular:</b> </label><br />
+          <label for="txtInfo" id="label"><b>Cantidad:</b> </label
+          ><br />
           <input
             type="text"
             name="txtInfo"
             id="txtInfo"
             class="form-control"
-            placeholder="Ingresar celular"
-            v-model="proveedor.celular"
+            placeholder="Ingresar cantidad"
+            v-model="material.cantidad"
           />
         </div>
 
         <div class="form-group">
-          <label for="txtInfo" id="label"><b>Empresa: </b></label><br />
+          <label for="txtInfo" id="label"
+            ><b>Costo:</b> </label
+          ><br />
           <input
-            type="text"
+            type="number"
             name="txtInfo"
             id="txtInfo"
             class="form-control"
-            placeholder="Ingresar empresa"
-            v-model="proveedor.empresa"
+            placeholder="Ingresar costo"
+            v-model="material.costo"
           />
         </div>
 
         <div class="form-group">
-          <label for="txtInfo" id="label"><b>Nit: </b></label><br />
-          <input
-            type="text"
-            name="txtInfo"
-            id="txtInfo"
-            class="form-control"
-            placeholder="Ingresar nit"
-            v-model="proveedor.nit"
-          />
+          <label for="txtInfo" id="label"><b>Proveedor: </b></label><br />
+          <select class="form-control" v-model="Selproveedor" @change="updateProv">
+              <option v-for="proveedor in proveedores" :key="proveedor.cedula">{{proveedor.cedula}}</option>
+          </select>
         </div>
-
-        <br />
         <div id="footer">
-          <button id="btn" align="center"><b>Guardar proveedor</b></button>
+          <button id="btn" align="center"><b>Guardar material</b></button>
         </div>
       </form>
     </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
 export default {
-  name: "RegistrarProveedor",
-  data(){
-      return {
-        proveedor: {
-            nombre: "",
-            cedula: "",
-            celular: "",
-            empresa: "",
-            nit: ""
-        },
-      }
+  name: "RegistrarMaterial",
+  data() {
+    return {
+      proveedores: [],
+      material: {
+        codigo: "",
+        nombre: "",
+        color: "",
+        cantidad: "",
+        costo: "",
+        cedula: ""
+      },
+    };
   },
   methods: {
+    updateProv() {
+      this.material.cedula = parseInt(this.Selproveedor);
+    },
     changeModal() {
       let showModal = false;
       this.$emit("updateModal", showModal);
     },
-    registrarProveedor(){
-        axios
-        .post("https://app-calzado.herokuapp.com/prov", this.proveedor, {
+    registrarMaterial() {
+      axios
+        .post("https://app-calzado.herokuapp.com/mat", this.material, {
           headers: {},
         })
         .then((result) => {
@@ -113,7 +127,7 @@ export default {
           } else {
             Swal.fire({
               icon: "success",
-              title: "Proveedor registrado",
+              title: "Material registrado",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -128,15 +142,31 @@ export default {
             timer: 1500,
           });
         });
-    }
+    },
+    loadProveedores(){
+      axios
+        .get("https://app-calzado.herokuapp.com/prov", {
+          headers: {},
+        })
+        .then((result) => {
+          this.proveedores = result.data;
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    },
+
   },
+  mounted(){
+    this.loadProveedores();
+  }
 };
 </script>
 
 <style>
-.contenedor {
+.contenedorMaterial {
   width: 350px;
-  height: 474px;
+  height: 512px;
   margin: auto;
   background: #fff;
   box-shadow: 1px 7px 25px rgba(0, 0, 0, 0.4);
@@ -157,6 +187,7 @@ export default {
 #label {
   font-family: "Red Hat Text", sans-serif;
   margin-left: 30px;
+  color: black;
 }
 #titulo {
   color: white;

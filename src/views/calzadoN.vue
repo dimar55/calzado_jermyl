@@ -29,7 +29,17 @@
         </div>
         <div class="añadir">
           <h3>{{ this.formatPeso.format(product.price) }}</h3>
-          <a href=""><img src="../assets/agregar.png" alt=""></a>
+          <form v-on:submit.prevent="addtocar">
+            <input
+              type="hidden"
+              name="producto"
+              v-bind:value="product.reference"
+            />
+            <input type="hidden" name="precio" v-bind:value="product.price" />
+            <button type="submit" class="trans">
+              <img src="../assets/agregar.png" alt="" />
+            </button>
+          </form>
         </div>
       </div>
     </div>
@@ -59,16 +69,17 @@
 import axios from "axios";
 import Header from "../components/header.vue";
 import Navi from "../components/barraNav.vue";
+import Swal from "sweetalert2";
 export default {
   name: "CalzadoN",
   data() {
     return {
       productos: [],
-      formatPeso: new Intl.NumberFormat('es-CO', {
-    style: 'currency',
-    currency: 'COP',
-    minimumFractionDigits: 0
-})
+      formatPeso: new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        minimumFractionDigits: 0,
+      }),
     };
   },
   components: { Header, Navi },
@@ -87,6 +98,35 @@ export default {
         .catch((error) => {
           alert(error);
         });
+    },
+    addtocar(submitEvent) {
+      let prod = {
+        reference: submitEvent.target.elements.producto.value,
+        price: submitEvent.target.elements.precio.value,
+      };
+      let carro = JSON.parse(sessionStorage.getItem("car")) || [];
+      let insertar = true;
+      let item = {
+        reference_prod: prod.reference,
+        cant_dp: 1,
+        precio_dp: prod.price,
+      };
+      for (let items of carro) {
+            if (item.reference_prod === items.reference_prod) {
+                insertar = false;
+                items.cant_dp += item.cant_dp;
+            }
+        }
+        if (insertar) {
+            carro.push(item);
+        }
+      sessionStorage.setItem("car", JSON.stringify(carro));
+      Swal.fire({
+        icon: "success",
+        title: "Producto agregado",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     },
   },
   mounted() {
@@ -165,10 +205,9 @@ li {
   height: 220px;
 }
 
-.añadir{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.añadir {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
 </style>

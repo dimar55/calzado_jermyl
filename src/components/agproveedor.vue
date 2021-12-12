@@ -4,15 +4,15 @@
   </transition>
   <transition name="fade">
     <div class="modal" v-if="showModal">
-      <AddClient v-on:updateModal="updateModal"></AddClient>
+      <RegistrarProveedor v-on:updateModal="updateModal"></RegistrarProveedor>
     </div>
   </transition>
   <div class="conta">
     <div class="contendoroperador">
       <div class="titadm">
-        <h1 class="titularadministrar">ADMINISTRAR CLIENTE</h1>
+        <h1 class="titularadministrar">ADMINISTRAR PROVEEDORES</h1>
         <button class="btnoperador" @click="showModal = true">
-          Agregar cliente
+          Agregar proveedor
         </button>
       </div>
     </div>
@@ -22,24 +22,26 @@
           <tr>
             <th>Nombre</th>
             <th>Identificación</th>
-            <th>Empresa</th>
             <th>Celular</th>
+            <th>Empresa</th>
+            <th>NIT</th>
             <th>Acciones</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr v-for="cliente in clientes" :key="cliente.cedula">
-            <td>{{ cliente.nombre }}</td>
-            <td>{{ cliente.cedula }}</td>
-            <td>{{ cliente.empresa }}</td>
-            <td>{{ cliente.celular }}</td>
+          <tr v-for="proveedor in proveedores" :key="proveedor.cedula">
+            <td>{{ proveedor.nombre }}</td>
+            <td>{{ proveedor.cedula }}</td>
+            <td>{{ proveedor.celular }}</td>
+            <td>{{ proveedor.empresa }}</td>
+            <td>{{ proveedor.nit }}</td>
             <td>
-              <form v-on:submit.prevent="delCliente">
+              <form v-on:submit.prevent="delProveedor">
                 <input
                   type="hidden"
-                  name="cedula"
-                  v-bind:value="cliente.cedula"
+                  name="proveedor"
+                  v-bind:value="proveedor.cedula"
                 />
                 <button class="delBtn" href="" type="submit">
                   <img src="../assets/delete.png" alt="" />
@@ -54,51 +56,51 @@
 </template>
 
 <script>
+import RegistrarProveedor from "../components/registrarProveedor.vue";
 import axios from "axios";
 import Swal from "sweetalert2";
-import AddClient from '../components/addClient.vue';
 export default {
-  name: "Agcliente",
-  data(){
+  name: "AgregarProv",
+  data() {
     return {
-      clientes: [],
-      showModal: false
-    }
+      proveedores: [],
+      showModal: false,
+    };
   },
-  components: {AddClient},
+  components: { RegistrarProveedor },
   methods: {
-    updateModal(modal){
-      this.loadClientes();
+    updateModal(modal) {
+      this.loadProveedores();
       this.showModal = modal;
     },
-    loadClientes(){
+    loadProveedores(){
       axios
-        .get("https://app-calzado.herokuapp.com/cli", {
+        .get("https://app-calzado.herokuapp.com/prov", {
           headers: {},
         })
         .then((result) => {
-          this.clientes = result.data;
+          this.proveedores = result.data;
         })
         .catch((error) => {
           alert(error);
         });
     },
-    delCliente(submitEvent){
-      let cli= {
-        cedula: parseInt(submitEvent.target.elements.cedula.value)
+    delProveedor(submitEvent){
+      let prov= {
+        cedula: parseInt(submitEvent.target.elements.proveedor.value)
       }
-      axios.delete("https://app-calzado.herokuapp.com/cli/" + cli.cedula, {
+      axios.delete("https://app-calzado.herokuapp.com/prov/" + prov.cedula, {
         headers: {}
       })
       .then((result)=>{
         if(result.status==201){
           Swal.fire({
               icon: "success",
-              title: "Cliente eliminado",
+              title: "Proveedor eliminado",
               showConfirmButton: false,
               timer: 1500,
             });
-            this.loadClientes();
+            this.loadProveedores();
         }else{
           Swal.fire({
               icon: "error",
@@ -115,10 +117,11 @@ export default {
     }
   },
   mounted(){
-    this.loadClientes();
+    this.loadProveedores();
   }
 };
 </script>
+
 <style>
 .modal-overlay {
   position: fixed;
@@ -138,9 +141,17 @@ export default {
   z-index: 101;
 }
 
-.delBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
+.btnoperador {
+  border: 4px solid #ffffff;
+  background: rgba(181, 19, 19, 0.75);
+  color: #ffffff;
+  font-size: 30px;
+  font-weight: 900;
+  padding: 5px;
+}
+
+.conta {
+  padding: 50px;
+  background: rgba(181, 19, 19, 0.75);
 }
 </style>

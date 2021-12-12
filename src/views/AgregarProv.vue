@@ -1,4 +1,5 @@
 <template>
+  <div id="app" class="app">
     <div class="header">
       <ul class="datosHeader">
         <div class="cLi">
@@ -11,10 +12,12 @@
         </div>
       </ul>
     </div>
+  </div>
   <Header></Header>
   <Navi></Navi>
-  <Paneloperador></Paneloperador>
-   <footer class="piePagina">
+  <AgregarProv></AgregarProv>
+
+  <footer class="piePagina">
     <div class="info">
       <h2>INFORMACIÓN</h2>
       <ul class="pList">
@@ -35,17 +38,13 @@
   </footer>
 </template>
 
+
 <script>
-import axios from "axios";
+import AgregarProv from "../components/agproveedor.vue";
 import Header from "../components/header.vue";
 import Navi from "../components/barraNav.vue";
-import Paneloperador from "../components/paneloperador.vue";
 export default {
-    name: "panelOp",
-    components: { Header, Paneloperador, Navi},
-}
+  name: "agregarprov",
+  components: { AgregarProv, Header, Navi },
+};
 </script>
-
-<style>
-
-</style>

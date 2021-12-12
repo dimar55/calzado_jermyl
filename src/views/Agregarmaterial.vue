@@ -13,6 +13,8 @@
       </ul>
     </div>
   </div>
+  <Header></Header>
+  <Navi></Navi>
 <Agregarmaterial></Agregarmaterial>
   <footer class="piePagina">
     <div class="info">
@@ -38,8 +40,10 @@
 
 <script>
 import Agregarmaterial from '../components/Amaterial.vue';
+import Header from "../components/header.vue";
+import Navi from "../components/barraNav.vue";
 export default {
     name: 'agregarmaterial',
-    components: {Agregarmaterial}
+    components: {Agregarmaterial, Header, Navi}
 }
 </script>

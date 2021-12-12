@@ -13,6 +13,8 @@
       </ul>
     </div>
   </div>
+  <Header></Header>
+  <Navi></Navi>
 <AgregarOpd></AgregarOpd>
 
   <footer class="piePagina">
@@ -39,8 +41,10 @@
 
 <script>
  import AgregarOpd from '../components/agoperador.vue';
+ import Header from "../components/header.vue";
+import Navi from "../components/barraNav.vue";
 export default {
     name: 'agregarop',
-    components: {AgregarOpd}
+    components: {AgregarOpd, Header, Navi}
 }
 </script>

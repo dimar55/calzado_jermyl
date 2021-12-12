@@ -1,34 +1,34 @@
 <template>
    <div class="contenedoradmin">
-    <h1 class="titularadmin">PANEL DE ACCIONNES DEL ADMINISTRADOR</h1>
+    <h1 class="titularadmin">PANEL DE ACCIONES DEL ADMINISTRADOR</h1>
     <div class="acciones">
         <div class="pnlad">
             <h3>Registrar Pedido</h3>
-            <button class="btnadmin"><img src="../assets/entrar.png" alt=""></button>
+            <button class="btnadmin"><img src="../assets/entrar.png" alt="" @click="goPedido"></button>
             </div>
         <div class="pnlad">
             <h3>Administrar Clientes</h3>
-            <button class="btnadmin"><img src="../assets/entrar.png" alt=""></button>
+            <button class="btnadmin"><img src="../assets/entrar.png" alt="" @click="goAdminClientes"></button>
             </div>
         <div class="pnlad">
             <h3>Administrar proveedores</h3>
-        <button class="btnadmin " ><img src="../assets/entrar.png" alt=""></button>
+        <button class="btnadmin " ><img src="../assets/entrar.png" alt="" @click="goProveedores"></button>
             </div>
         <div class="pnlad">
             <h3>Administrar productos</h3>
-            <button class="btnadmin"><img src="../assets/entrar.png" alt=""></button>
+            <button class="btnadmin"><img src="../assets/entrar.png" alt="" @click="goProductos"></button>
             </div>
         <div class="pnlad">
             <h3>Administrar operadores</h3>
-            <button class="btnadmin"><img src="../assets/entrar.png" alt=""></button>
+            <button class="btnadmin"><img src="../assets/entrar.png" alt="" @click="goOperadores"></button>
             </div>
         <div class="pnlad">
             <h3>Administrar materiales</h3>
-            <button class="btnadmin"><img src="../assets/entrar.png" alt=""></button>
+            <button class="btnadmin"><img src="../assets/entrar.png" alt="" @click="goMateriales"></button>
             </div>
         <div class="pnlad">
             <h3>Balances</h3>
-            <button class="btnadmin"><img src="../assets/entrar.png" alt=""></button>
+            <button class="btnadmin"><img src="../assets/entrar.png" alt="" @click="goBalance"></button>
             </div>
         </div>   
     </div> 
@@ -37,6 +37,29 @@
 <script>
 export default {
     name: "Paneladmin",
+    methods: {
+        goAdminClientes(){
+            this.$router.push({path: '/agregar-cliente'});
+        },
+        goProveedores(){
+            this.$router.push({path: '/agregar-proveedor'});
+        },
+        goOperadores(){
+            this.$router.push({path: '/agregar-operador'});            
+        },
+        goProductos(){
+            this.$router.push({path: '/administrar-productos'});            
+        },
+        goMateriales(){
+            this.$router.push({path: '/administrar-materiales'});
+        },
+        goBalance(){
+            this.$router.push({path: '/balance'});
+        },
+        goPedido(){
+            this.$router.push({path: '/registrar-pedido'});
+        }
+    }
 }
 </script>
 

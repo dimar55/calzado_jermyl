@@ -13,6 +13,8 @@
       </ul>
     </div>
   </div>
+    <Header></Header>
+  <Navi></Navi>
   <Admpro></Admpro>
    <footer class="piePagina">
     <div class="info">
@@ -37,10 +39,11 @@
 
 <script>
 import Admpro from "../components/administrarpro.vue";
-
+import Header from "../components/header.vue";
+import Navi from "../components/barraNav.vue";
 export default {
     name: 'adminpro',
-    components: {Admpro},
+    components: {Admpro, Header, Navi},
 }
 </script>
 

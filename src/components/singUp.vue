@@ -3,27 +3,84 @@
     <div class="container_logIn_user">
       <div class="cabeceraLogin">
         <h2>Iniciar sesión</h2>
-        <img src="../assets/cerrar.png" alt="" />
+        <img src="../assets/cerrar.png" alt="" @click="changeModal" />
       </div>
-      <form class="formulario">
+      <form class="formulario" v-on:submit.prevent="login">
         <p>USUARIO:</p>
-        <input type="text" class="entrada" />
+        <input type="text" class="entrada" v-model="user.username"/>
         <br />
         <p>CONTRASEÑA:</p>
-        <input type="password" class="entrada" />
-        <br />  
-      </form>
-      <div class="containerbtn">
-        <img src="../assets/enter.png" alt="">
+        <input type="password" class="entrada" v-model="user.password"/>
+        <br />
+
+        <div class="containerbtn">
+          <img src="../assets/enter.png" alt="" />
           <button type="submit">Ingresar</button>
         </div>
+      </form>
     </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+import Swal from "sweetalert2";
 export default {
   name: "SingUp",
+  data() {
+    return {
+      user: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    changeModal() {
+      let showModal = false;
+      this.$emit("updateModal", showModal);
+    },
+    login() {
+      axios
+        .post("https://app-calzado.herokuapp.com/auth/signin", this.user, {
+          headers: {},
+        })
+        .then((result) => {
+          if (result.data.message) {
+            Swal.fire({
+              icon: "error",
+              title: "Credenciales incorrectas",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          } else {
+            let dataLogIn = {
+              username: this.user.username,
+              token_access: result.data.token,
+            };
+            Swal.fire({
+              icon: "success",
+              title: "Sesion iniciada",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            sessionStorage.setItem("token", dataLogIn.token_access);
+            sessionStorage.setItem("username", dataLogIn.username);
+            sessionStorage.setItem("isAuth", true);
+            this.$emit("updateLogin");
+          }
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Credenciales incorrectas",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        });
+    },
+    
+  },
 };
 </script>
 
@@ -46,6 +103,7 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: white;
 }
 .logIn_user h2 {
   color: #ffffff;
@@ -75,7 +133,7 @@ export default {
   font-size: 25px;
   font-weight: 700;
 }
-.logIn_user button:hover{
+.logIn_user button:hover {
   background-color: white;
   color: rgba(51, 51, 51);
 }
@@ -91,11 +149,11 @@ export default {
 .containerbtn {
   display: flex;
   margin-top: 30px;
+  margin-left: -45px;
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.8);
   width: 390px;
   justify-content: center;
-
 }
 .entrada {
   width: 499px;
@@ -106,5 +164,7 @@ export default {
   border: 2px solid #000000;
   box-sizing: border-box;
 }
-
+.formulario {
+  color: #000000;
+}
 </style>

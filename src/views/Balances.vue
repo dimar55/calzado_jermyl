@@ -13,7 +13,8 @@
       </ul>
     </div>
   </div>
-  
+  <Header></Header>
+  <Navi></Navi>
 <Balances></Balances>
   <footer class="piePagina">
     <div class="info">
@@ -39,9 +40,10 @@
 <script>
 import axios from "axios";
 import Header from "../components/header.vue";
+import Navi from "../components/barraNav.vue";
 import Balances from "../components/balances.vue";
 export default {
     name: 'Balance',
-    components: {Balances}
+    components: {Balances, Header, Navi}
 }
 </script>

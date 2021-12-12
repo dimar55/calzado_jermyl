@@ -10,15 +10,15 @@
     </div>
   </div>
   <div class="tipoCalzado">
-    <div class="calDama">
+    <div class="calDama" @click="goDama">
       <p>Calzado para Dama</p>
       <img src="../assets/mujer.png" alt="" class="imgTipo"  id="dama"/>
     </div>
-    <div class="calHombre">
+    <div class="calHombre" @click="goCaballero">
       <p>Calzado para Caballero</p>
       <img src="../assets/hombre.png" alt="" class="imgTipo"/>
     </div>
-    <div class="calNiño">
+    <div class="calNiño" @click="goNiño">
       <p>Calzado para Niños</p>
       <img src="../assets/niños.png" alt="" class="imgTipo" id="niño"/>
     </div>
@@ -26,8 +26,21 @@
 </template>
 
 <script>
+import axios from "axios";
+import Swal from "sweetalert2";
 export default {
   name: "Welcome",
+  methods:{
+    goDama(){
+      this.$router.push({path: '/calzado-dama'});
+    },
+    goCaballero(){
+      this.$router.push({path: '/calzado-caballero'});
+    },
+    goNiño(){
+      this.$router.push({path: '/calzado-ninos'});
+    }
+  }
 };
 </script>
 

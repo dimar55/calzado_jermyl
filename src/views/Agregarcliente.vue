@@ -1,5 +1,5 @@
 <template>
-     <div id="app" class="app">
+  <div id="app" class="app">
     <div class="header">
       <ul class="datosHeader">
         <div class="cLi">
@@ -13,7 +13,9 @@
       </ul>
     </div>
   </div>
-<Agcliente></Agcliente>
+  <Header></Header>
+  <Navi></Navi>
+  <Agcliente></Agcliente>
   <footer class="piePagina">
     <div class="info">
       <h2>INFORMACIÓN</h2>
@@ -32,14 +34,15 @@
       <h2>CATEGORÍAS</h2>
       <p>Dama / Caballero / Niños</p>
     </div>
-  </footer> 
+  </footer>
 </template>
 
 <script>
-import Agcliente from '../components/Acliente.vue';
-
+import Agcliente from "../components/Acliente.vue";
+import Header from "../components/header.vue";
+import Navi from "../components/barraNav.vue";
 export default {
-    name: 'agcliente',
-    components: { Agcliente},
-}
+  name: "agcliente",
+  components: { Agcliente, Header, Navi },
+};
 </script>

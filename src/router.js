@@ -13,11 +13,13 @@ import pedido from './views/pedido.vue';
 import agregaropd from './views/AgregarOpd.vue';
 import agcliente from './views/Agregarcliente.vue';
 import agregarmaterial from './views/Agregarmaterial';
+import agregarprov from './views/AgregarProv.vue';
+import agregarop from './views/AgregarOpd.vue';
 const routes = [
 {
   path: '/',
   name: 'root',
-  component: Conocenos
+  component: inicio
 },
 {
   path: '/calzado-dama',
@@ -35,61 +37,55 @@ const routes = [
   component: CalzadoN
 },
 {
-  path: '/panel',
-  name: 'panelOp',
-  component: panelOp
+  path: '/conocenos',
+  name: 'conocenos',
+  component: Conocenos
 },
-
-{
-  path: '/balance',
-  name: 'Balances',
-  component: Balances
-},
-
 {
   path:'/panelAd',
   name: 'paneladmin',
   component: panelAd
 },
-
 {
-  path:'/inicio',
-  name: 'inicio',
-  component: inicio
+  path: '/panelOp',
+  name: 'panelOp',
+  component: panelOp
 },
-
+{
+  path: '/agregar-cliente',
+  name: 'AgCliente',
+  component: agcliente
+},
+{
+  path: '/agregar-proveedor',
+  name: 'AgProveedor',
+  component: agregarprov
+},
+{
+  path: '/agregar-operador',
+  name: 'AgOperador',
+  component: agregarop
+},
 {
   path:'/administrar-productos',
   name: 'adminpro',
   component: adminpro
 },
-
 {
-  path: '/pedidos',
-  name:  'Pedido',
-  component: pedido
-},
-
-{
- path: '/agregar-operador',
- name: 'AgregarOpd',
- component: agregaropd
-},
-
-
-{
-  path: '/agregar-cliente',
-  name: 'AgCliente',
-  component: agcliente 
-
-},
-
-{
-  path: '/agregar-material',
+  path: '/administrar-materiales',
   name: 'AgMaterial',
   component: agregarmaterial
 },
-
+{
+  path: '/balance',
+  name: 'Balances',
+  component: Balances
+},
+{
+  path: '/registrar-pedido',
+  name:  'Pedido',
+  component: pedido
+},
 
 ]
 const router = createRouter({

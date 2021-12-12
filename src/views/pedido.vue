@@ -13,6 +13,8 @@
       </ul>
     </div>
   </div>
+  <Header></Header>
+<Navi></Navi>
 <Pedido></Pedido>
    <footer class="piePagina">
     <div class="info">
@@ -37,8 +39,10 @@
 
 <script>
 import Pedido from '../components/rPedido.vue';
+import Header from "../components/header.vue";
+import Navi from "../components/barraNav.vue";
 export default {
     name: 'pedido',
-    components: {Pedido}
+    components: {Pedido, Header, Navi}
 }
 </script>

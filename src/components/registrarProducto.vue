@@ -1,12 +1,24 @@
 <template>
   <div class="modal" tabindex="-1">
-    <div class="contenedor">
+    <div class="contenedorProducto">
       <div id="head">
-        <h4 id="titulo">Agregar proveedor</h4>
+        <h4 id="titulo">Agregar producto</h4>
         <img src="../assets/cerrar.png" alt="" @click="changeModal" />
       </div>
       <br />
-      <form name="frmOperador" v-on:submit.prevent="registrarProveedor">
+      <form name="frmOperador" v-on:submit.prevent="registrarProducto">
+        <div class="form-group">
+          <label for="txtInfo" id="label"><b>Imagen: </b></label><br />
+          <input
+            type="text"
+            name="txtInfo"
+            id="txtInfo"
+            class="form-control"
+            placeholder="Pegar URL"
+            v-model="product.imageurl"
+          />
+        </div>
+
         <div class="form-group">
           <label for="txtInfo" id="label"><b>Nombre: </b></label><br />
           <input
@@ -15,81 +27,106 @@
             id="txtInfo"
             class="form-control"
             placeholder="Ingresar nombre"
-            v-model="proveedor.nombre"
+            v-model="product.name"
           />
         </div>
 
         <div class="form-group">
-          <label for="txtInfo" id="label"><b>Identificación:</b></label
+          <label for="txtInfo" id="label"><b>Referencia:</b></label
           ><br />
           <input
             type="text"
             name="txtInfo"
             id="txtInfo"
             class="form-control"
-            placeholder="Ingresar identificación"
-            v-model="proveedor.cedula"
+            placeholder="Ingresar referencia"
+            v-model="product.reference"
           />
         </div>
 
         <div class="form-group">
-          <label for="txtInfo" id="label"><b>Celular:</b> </label><br />
+          <label for="txtInfo" id="label"><b>Precio:</b> </label><br />
+          <input
+            type="number"
+            name="txtInfo"
+            id="txtInfo"
+            class="form-control"
+            placeholder="Ingresar precio"
+            v-model="product.price"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="txtInfo" id="label"><b>Material: </b></label><br />
           <input
             type="text"
             name="txtInfo"
             id="txtInfo"
             class="form-control"
-            placeholder="Ingresar celular"
-            v-model="proveedor.celular"
+            placeholder="Ingresar material"
+            v-model="product.material"
           />
         </div>
 
         <div class="form-group">
-          <label for="txtInfo" id="label"><b>Empresa: </b></label><br />
+          <label for="txtInfo" id="label"><b>Suela: </b></label><br />
           <input
             type="text"
             name="txtInfo"
             id="txtInfo"
             class="form-control"
-            placeholder="Ingresar empresa"
-            v-model="proveedor.empresa"
+            placeholder="Ingresar suela"
+            v-model="product.sole"
           />
         </div>
 
         <div class="form-group">
-          <label for="txtInfo" id="label"><b>Nit: </b></label><br />
+          <label for="txtInfo" id="label"><b>Talla: </b></label><br />
           <input
             type="text"
             name="txtInfo"
             id="txtInfo"
             class="form-control"
-            placeholder="Ingresar nit"
-            v-model="proveedor.nit"
+            placeholder="Ingresar talla"
+            v-model="product.size"
           />
         </div>
-
-        <br />
+        <div class="form-group">
+          <label for="txtInfo" id="label"><b>Categoria: </b></label><br />
+          <input
+            type="text"
+            name="txtInfo"
+            id="txtInfo"
+            class="form-control"
+            placeholder="Ingresar categoria"
+            v-model="product.category"
+          />
+        </div>
         <div id="footer">
-          <button id="btn" align="center"><b>Guardar proveedor</b></button>
+          <button id="btn" align="center"><b>Guardar producto</b></button>
         </div>
       </form>
     </div>
   </div>
 </template>
+
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
 export default {
-  name: "RegistrarProveedor",
+  name: "RegistrarProducto",
   data(){
       return {
-        proveedor: {
-            nombre: "",
-            cedula: "",
-            celular: "",
-            empresa: "",
-            nit: ""
-        },
+          product:{
+              reference: "",
+              name: "",
+              price: "",
+              sole: "",
+              material: "",
+              imageURL: "",
+              size: "",
+              category: ""
+          }
       }
   },
   methods: {
@@ -97,13 +134,14 @@ export default {
       let showModal = false;
       this.$emit("updateModal", showModal);
     },
-    registrarProveedor(){
+    registrarProducto(){
         axios
-        .post("https://app-calzado.herokuapp.com/prov", this.proveedor, {
+        .post("https://app-calzado.herokuapp.com/prod", this.product, {
           headers: {},
         })
         .then((result) => {
           if (result.data.detail) {
+              console.log(result.data.detail);
             Swal.fire({
               icon: "error",
               title: "Fallo al crear",
@@ -113,7 +151,7 @@ export default {
           } else {
             Swal.fire({
               icon: "success",
-              title: "Proveedor registrado",
+              title: "Producto registrado",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -134,9 +172,9 @@ export default {
 </script>
 
 <style>
-.contenedor {
+.contenedorProducto {
   width: 350px;
-  height: 474px;
+  height: 644px;
   margin: auto;
   background: #fff;
   box-shadow: 1px 7px 25px rgba(0, 0, 0, 0.4);

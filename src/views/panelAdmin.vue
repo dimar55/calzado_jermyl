@@ -13,6 +13,7 @@
     </div>
     
 <Header></Header>
+<Navi></Navi>
 <Paneladmin></Paneladmin>
 
      <footer class="piePagina">
@@ -39,10 +40,11 @@
 <script>
 import axios from "axios";
 import Header from "../components/header.vue";
+import Navi from "../components/barraNav.vue";
 import Paneladmin from "../components/paneladmin.vue";    
 export default {
     name: 'panelAd',
-    components: {Header, Paneladmin}
+    components: {Header, Paneladmin, Navi}
 }
 </script>
 
